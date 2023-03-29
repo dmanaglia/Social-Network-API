@@ -27,13 +27,11 @@ const thoughtSchema = new Schema(
   }
 );
 
-thoughtSchema.virtual('reactionCount').get(function () {
-    return this.friends.length;
-});
-
 thoughtSchema.methods.getDate = function () {
-    console.log("Parse date here");
-    return this.createdAt;
+  let month = this.createdAt.getMonth();
+  let day = this.createdAt.getDate();
+  let year = this.createdAt.getUTCFullYear();
+  return `${month}/${day}/${year}`;
 };
 
 const Thought = model('thought', thoughtSchema);

@@ -29,8 +29,10 @@ const reactionSchema = new Schema(
 );
 
 reactionSchema.methods.getDate = function () {
-    console.log("Parse date here");
-    return this.createdAt;
+  let month = this.createdAt.getMonth();
+  let day = this.createdAt.getDate();
+  let year = this.createdAt.getUTCFullYear();
+  return `${month}/${day}/${year}`;
 };
 
 module.exports = reactionSchema;

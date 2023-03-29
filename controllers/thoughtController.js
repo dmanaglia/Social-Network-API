@@ -8,7 +8,6 @@ module.exports = {
     },
     getSingleThought(req, res){
         Thought.findOne({ _id: req.params.thoughtID })
-        // .select('-__v')
         .then((thought) =>
           !thought
             ? res.status(404).json({ message: 'No thought with that ID' })
@@ -17,7 +16,7 @@ module.exports = {
         .catch((err) => res.status(500).json(err));
     },
     createThought(req, res){
-        Thought.create(req.body)
+        Thought.create({thoughtText: req.body.thoughtText, username: req.body.username})
         .then((thought) => {
             User.findOneAndUpdate(
                 { _id: req.body.userID },
